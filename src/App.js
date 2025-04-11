@@ -1,12 +1,20 @@
 import './App.css';
-import Counter from './components/Counter';
-import UsersListQuery from './components/UsersListQuery';
+import Cart from './pages/Cart/Cart';
+import MainPage from './pages/MainPage/MainPage';
+import { Routes, Route, BrowserRouter } from "react-router-dom"
+
 
 function App() {
   return (
-    <div className="App">
-      <UsersListQuery />
-    </div>
+    <BrowserRouter>
+    <div style={{ margin: '0 auto' }}>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path='/cart' element={<Cart />} />
+        <Route path='/favorites' element={<></>} />
+      </Routes>
+      </div>
+      </BrowserRouter>
   );
 }
 
