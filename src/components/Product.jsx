@@ -1,15 +1,21 @@
-import { Col, Spin } from "antd";
+import { Col, Pagination, Spin } from "antd";
 import { useProducts } from "../api/useProducts";
 import CardBody from "./Card";
 import Swiper from "swiper/react";
 import Slider from "./Slider";
 import { useStore } from "../features/store";
+import { useState } from "react";
 
 
 
 const Products = () => {
-  const { data, isLoading } = useProducts()
-  const {addToCart} = useStore()
+  const [currentPage, setCurrentPage] = useState(1)
+  const { data, isLoading } = useProducts((currentPage - 1) * 30, 30)
+  const { addToCart } = useStore()
+  
+  const handlePageChange = (page) => {
+    setCurrentPage(page)
+  }
 
   if (isLoading) return <Spin />
 
@@ -30,6 +36,14 @@ const Products = () => {
           ))
         }
       </div>
+
+      <Pagination
+        current={currentPage}
+        total={data.total}
+        pageSize={30}
+        onChange={handlePageChange}
+        style={{marginTop: '20px', display: 'flex', justifyContent: 'center'}}
+      />
     
       <p style={{fontSize: "50px", marginTop: "100px"}}>Популярные товары</p>
       <div style={{display: 'flex'}}>
