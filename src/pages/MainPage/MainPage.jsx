@@ -8,6 +8,7 @@ const MainPage = () => {
   return (
     <div>
       <Search />
+      <button>Omurbek</button>
       <Products />
     </div>
   )
